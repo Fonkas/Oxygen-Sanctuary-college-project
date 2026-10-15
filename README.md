@@ -10,7 +10,7 @@
 
 | Forma | Como |
 |---|---|
-| **No navegador (sem instalar nada)** | Abre **https://O-TEU-UTILIZADOR.github.io/oxygen-sanctuary/** |
+| **No navegador (sem instalar nada)** | Abre **(https://fonkas.github.io/Oxygen-Sanctuary-college-project/)** |
 | **Windows** | Descarrega `Oxygen-Sanctuary-Instalador-Windows-x.y.z.exe` na página [Releases](../../releases) e instala. Há também uma versão **portátil** que não precisa de instalação. |
 | **macOS** | Descarrega o `.dmg` na página [Releases](../../releases): `arm64` para Macs com chip Apple (M1, M2, M3, M4) e `x64` para Macs Intel. Arrasta a aplicação para *Aplicações*. |
 | **A partir do código** | Descarrega o repositório e abre `web/index.html` no navegador, ou faz duplo clique em `Jogar-Windows.bat` / `Jogar-macOS.command`. |
