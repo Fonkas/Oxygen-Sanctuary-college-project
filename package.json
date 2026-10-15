@@ -1,0 +1,50 @@
+{
+  "name": "oxygen-sanctuary",
+  "productName": "Oxygen Sanctuary",
+  "version": "1.0.0",
+  "description": "Demo de exploração em primeira pessoa: os últimos refúgios da natureza num planeta que deixou de respirar.",
+  "author": "Oxygen Sanctuary",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "electron/main.js",
+  "scripts": {
+    "vendor": "node scripts/fetch-vendor.mjs",
+    "start": "npm run vendor && electron .",
+    "dist": "npm run vendor && electron-builder --publish never",
+    "dist:win": "npm run vendor && electron-builder --win --publish never",
+    "dist:mac": "npm run vendor && electron-builder --mac --publish never",
+    "dist:linux": "npm run vendor && electron-builder --linux --publish never"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "pt.projeto.oxygensanctuary",
+    "productName": "Oxygen Sanctuary",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["electron/**/*", "web/**/*", "package.json"],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Oxygen Sanctuary",
+      "artifactName": "Oxygen-Sanctuary-Instalador-Windows-${version}.${ext}"
+    },
+    "portable": { "artifactName": "Oxygen-Sanctuary-Portatil-Windows-${version}.${ext}" },
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["x64", "arm64"] }],
+      "category": "public.app-category.games",
+      "identity": null,
+      "artifactName": "Oxygen-Sanctuary-macOS-${version}-${arch}.${ext}"
+    },
+    "linux": { "target": ["AppImage"], "category": "Game" }
+  }
+}
