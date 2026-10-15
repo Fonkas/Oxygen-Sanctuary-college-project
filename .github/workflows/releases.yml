@@ -1,0 +1,47 @@
+name: Criar instaladores
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Instalar dependências
+        run: npm install
+      - name: Criar instalador Windows
+        if: runner.os == 'Windows'
+        run: npm run dist:win
+      - name: Criar instalador macOS
+        if: runner.os == 'macOS'
+        run: npm run dist:mac
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - name: Guardar os ficheiros criados
+        uses: actions/upload-artifact@v4
+        with:
+          name: instaladores-${{ runner.os }}
+          path: |
+            dist/*.exe
+            dist/*.dmg
+          if-no-files-found: ignore
+      - name: Anexar à página de Releases
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.exe
+            dist/*.dmg
